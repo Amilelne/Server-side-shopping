@@ -1,6 +1,7 @@
 const { configure } = require('./config');
 const express = require('express');
 const hbs = require('hbs');
+const helmet = require('helmet');
 
 const app = express();
 
@@ -11,5 +12,7 @@ for (const key of Object.keys(server)) {
 
 // Set view engine
 app.set('view engine', 'hbs');
+
+app.use(helmet);
 
 module.exports = app;

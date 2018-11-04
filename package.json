@@ -10,9 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.5.0",
     "express": "^4.16.4",
     "fs": "0.0.1-security",
     "hbs": "^4.0.1",
+    "helmet": "^3.14.0",
     "lodash": "^4.17.11",
     "path": "^0.12.7",
     "properties": "^1.2.1"
