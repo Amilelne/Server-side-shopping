@@ -4,19 +4,19 @@ const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema(
   {
-    Name: {
+    name: {
       required: true,
       type: String
     },
-    Price: {
+    price: {
       required: true,
       type: Schema.Types.Decimal128
     },
-    Description: {
+    description: {
       required: false,
       type: String
     },
-    Category: {
+    category: {
       required: true,
       type: String
     }
@@ -25,6 +25,11 @@ const ItemSchema = new Schema(
     versionKey: false
   }
 );
+
+// Query helpers
+ItemSchema.query.byCategory = function(Category) {
+  return this.where({ category: new RegExp(Category, 'i') });
+};
 
 const name = conf('collections.item');
 exports.Item = mongoose.model(name, ItemSchema, name);

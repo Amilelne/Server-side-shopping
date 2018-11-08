@@ -5,15 +5,15 @@ const categories = ['Metal', 'Wood', 'Plastic', 'Polymer', 'Cotton'];
 
 async function dummy() {
   for (let i = 1; i < 100; i++) {
-    let Name = faker.commerce.productName();
-    let Price = faker.commerce.price();
-    let Description = faker.lorem.paragraphs();
-    let Category = categories[Math.floor(Math.random() * categories.length)];
+    let name = faker.commerce.productName();
+    let price = faker.commerce.price();
+    let description = faker.lorem.paragraphs();
+    let category = categories[Math.floor(Math.random() * categories.length)];
     let itemRecord = await new Item({
-      Name,
-      Price,
-      Description,
-      Category
+      name,
+      price,
+      description,
+      category
     }).save();
     console.log(itemRecord);
   }

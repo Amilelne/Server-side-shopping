@@ -25,6 +25,12 @@
   <link href="/css/shop-item.css"
         rel="stylesheet">
 
+  <!-- Bootstrap core JavaScript -->
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <!-- Fontawesome core JavaScript -->
+  <script src="/js/all.min.js"></script>
+
 </head>
 <header>
   <!-- Navigation -->
@@ -41,6 +47,22 @@
               aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+          <input type="text"
+                 class="form-control"
+                 placeholder="Search for..."
+                 aria-label="Search"
+                 aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary"
+                    type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
       <div class="collapse navbar-collapse"
            id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
@@ -79,9 +101,5 @@
   </div>
   <!-- /.container -->
 </footer>
-
-<!-- Bootstrap core JavaScript -->
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.bundle.min.js"></script>
 
 </html>

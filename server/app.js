@@ -3,7 +3,13 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const helmet = require('helmet');
 const mongoose = require('./mongoose');
-const { dummy } = require('./utils');
+const {
+  dummy,
+  itemQuery,
+  categoryQuery,
+  getItemById,
+  pagination
+} = require('./utils');
 
 const app = express();
 
@@ -30,12 +36,20 @@ app.use(express.static(process.cwd() + '/public'));
 app.use(helmet());
 
 // Home router
-app.get('/', (req, res) => {
-  res.render('home');
+app.get('/', async (req, res) => {
+  let items = await itemQuery(req);
+  console.log(pagination(req.query.page ? req.query.page : 1, items.length));
+  res.render('home', {
+    items: items,
+    categories: await categoryQuery(),
+    pages: pagination(req.query.page ? req.query.page : 1, items.length)
+  });
 });
 
-app.get('/item', (req, res) => {
-  res.render('item');
+app.get('/item', async (req, res) => {
+  res.render('item', {
+    item: await getItemById(req)
+  });
 });
 
 module.exports = app;
