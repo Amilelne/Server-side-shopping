@@ -1,7 +1,6 @@
 const { Item } = require('../models/item.model');
 
 function itemQuery(req) {
-  const page = req.query.page ? Number(req.query.page) : Number(1);
   const category = req.query.category ? req.query.category : '.*';
   const sortby = req.query.sortby ? req.query.sortby.toLowerCase() : 'name';
   const asc = req.query.asc == -1 ? Number(-1) : Number(1);
@@ -21,12 +20,6 @@ function itemQuery(req) {
         description: { $substr: ['$description', 0, 50] },
         category: 1
       }
-    },
-    {
-      $skip: ([page] - 1) * 9
-    },
-    {
-      $limit: 9
     }
   ]).then(function(res) {
     return res;
