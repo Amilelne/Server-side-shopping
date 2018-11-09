@@ -5,7 +5,22 @@
   <div class="row">
 
     <div class="col-lg-2">
-
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+          <input type="text"
+                 id="search"
+                 class="form-control"
+                 placeholder="Search for"
+                 aria-label="Search"
+                 aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary"
+                    type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
       <h1 class="my-4">Category</h1>
       <div class="list-group">
         <a class="list-group-item"
@@ -92,7 +107,7 @@
       query.delete('page');
       if (category === 'all') query.delete('category');
       else query.set('category', category);
-      redirect();
+      //redirect();
     }
   })
 
@@ -103,6 +118,12 @@
 
   $('#sortSelect').on('change', function () {
     query.set('sortby', this.value);
+    redirect();
+  })
+
+  $('form').submit(function () {
+    event.preventDefault();
+    query.set('search', $('#search').val());
     redirect();
   })
 

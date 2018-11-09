@@ -1,12 +1,14 @@
 const { Item } = require('../models/item.model');
 
 function itemQuery(req) {
+  const searchText = req.query.search ? req.query.search : '.*';
   const category = req.query.category ? req.query.category : '.*';
   const sortby = req.query.sortby ? req.query.sortby.toLowerCase() : 'name';
   const asc = req.query.asc == -1 ? Number(-1) : Number(1);
   return Item.aggregate([
     {
       $match: {
+        name: { $regex: new RegExp(searchText, 'i') },
         category: { $regex: new RegExp(category) }
       }
     },
