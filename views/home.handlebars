@@ -8,7 +8,8 @@
 
       <h1 class="my-4">Category</h1>
       <div class="list-group">
-        <a class="list-group-item">All</a>
+        <a class="list-group-item"
+           data-category="all">All</a>
         {{#each categories}}
           <a data-category="{{category}}"
              class="list-group-item">{{category}}</a>
@@ -82,12 +83,13 @@
 
 <script>
   const query = new URLSearchParams(location.search);
-  const currentPage = 1;
-  const currentCategory = ''
+  const currentPage = Number(query.get('page'));
+  const currentCategory = query.get('category');
   $('[data-category]').on('click', function (event) {
     event.preventDefault();
     const category = $(this).attr('data-category');
     if (category !== currentCategory) {
+      query.delete('page');
       if (category === 'all') query.delete('category');
       else query.set('category', category);
       redirect();
@@ -106,10 +108,22 @@
 
   $('[data-page]').on('click', function (event) {
     event.preventDefault();
-    const page = Number($(this).attr('data-page'));
-    if (page !== currentPage) {
-      query.set('page', page);
+    if ($(this).attr('data-page') === 'previous') {
+      if (currentPage !== 1) {
+        query.set('page', currentPage - 1);
+        redirect();
+      }
+    }
+    else if ($(this).attr('data-page') === 'next') {
+      query.set('page', currentPage + 1);
       redirect();
+    }
+    else {
+      const page = Number($(this).attr('data-page'));
+      if (page !== currentPage) {
+        query.set('page', page);
+        redirect();
+      }
     }
   })
 </script>

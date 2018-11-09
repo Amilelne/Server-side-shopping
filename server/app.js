@@ -38,8 +38,8 @@ app.use(helmet());
 // Home router
 app.get('/', async (req, res) => {
   let items = await itemQuery(req);
-  let currentPage = req.query.page ? req.query.page : 1;
-  let finalPage = Number(items.length) / 9;
+  let currentPage = req.query.page ? Number(req.query.page) : 1;
+  let finalPage = Math.ceil(Number(items.length) / 9);
   res.render('home', {
     items: items.slice((currentPage - 1) * 9, currentPage * 9),
     categories: await categoryQuery(),
